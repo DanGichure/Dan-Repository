@@ -11,6 +11,7 @@ import { UserFormComponent } from './user-form/user-form.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppRoutingModule } from './app-routing.module';  // Import routing module
+import { UserManagementComponent } from './user-management/user-management.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { AppRoutingModule } from './app-routing.module';  // Import routing modu
     UserListComponent,
     UserFormComponent,
     UserDetailComponent,
-    DashboardComponent
+    DashboardComponent,
+    UserManagementComponent
   ],
   imports: [
     BrowserModule,
