@@ -11,6 +11,9 @@ export class UserListComponent implements OnInit {
   @Input () users: User[] = [];
   selectedUser: User | null = null;
 
+  //Check if we are in edit mode
+  isEditingMode: boolean = false;
+
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
@@ -39,11 +42,9 @@ export class UserListComponent implements OnInit {
     );
   }
 
-  onEdit(user: User): void {
-    this.selectedUser = user;
-  }
   
-  updateUser(): void {
+  onUpdate(user: User): void {
+    this.selectedUser = {...user };
     if (this.selectedUser) {
       this.userService.updateUser(this.selectedUser.id, this.selectedUser).subscribe(
         updatedUser => {
@@ -52,6 +53,7 @@ export class UserListComponent implements OnInit {
             this.users[index] = updatedUser;
           }
           this.selectedUser = null;
+          this.isEditingMode = true;
         },
         error => console.error('Error updating user', error)
       );
@@ -73,5 +75,15 @@ export class UserListComponent implements OnInit {
 
   onView(user: User): void {
     this.selectedUser = this.selectedUser === user ? null : user;
+  }
+
+  isEditing(user: User): boolean {
+    return this.isEditingMode && this.selectedUser === user;
+  }
+
+  OnSubmit(): void {
+    if(this.selectedUser) {
+      this.onUpdate(this.selectedUser)
+    }
   }
 }
