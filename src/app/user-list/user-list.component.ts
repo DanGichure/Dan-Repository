@@ -27,8 +27,8 @@ export class UserListComponent implements OnInit {
   }
 
   filterUsers(): void {
-    const path = this.route.snapshot.routeConfig?.path;
-
+    const path = this.route.snapshot.url.map(segment => segment.toString()).join('/');
+    console.log('Current route path:', path); // Log to verify path
     if (path === 'users/verified') {
       this.users = this.allUsers.filter(user => user.verified);
     } else if (path === 'users/unverified') {
