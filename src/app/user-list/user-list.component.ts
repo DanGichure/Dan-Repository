@@ -11,8 +11,6 @@ export class UserListComponent implements OnInit {
   @Input () users: User[] = [];
   selectedUser: User | null = null;
 
-  //Check if we are in edit mode
-  isEditingMode: boolean = false;
 
   constructor(private userService: UserService) { }
 
@@ -45,19 +43,7 @@ export class UserListComponent implements OnInit {
   
   onUpdate(user: User): void {
     this.selectedUser = {...user };
-    if (this.selectedUser) {
-      this.userService.updateUser(this.selectedUser.id, this.selectedUser).subscribe(
-        updatedUser => {
-          const index = this.users.findIndex(user => user.id === updatedUser.id);
-          if (index !== -1) {
-            this.users[index] = updatedUser;
-          }
-          this.selectedUser = null;
-          this.isEditingMode = true;
-        },
-        error => console.error('Error updating user', error)
-      );
-    }
+    
   }
   
 
@@ -78,12 +64,21 @@ export class UserListComponent implements OnInit {
   }
 
   isEditing(user: User): boolean {
-    return this.isEditingMode && this.selectedUser === user;
+    return this.selectedUser === user;
   }
 
-  OnSubmit(): void {
-    if(this.selectedUser) {
-      this.onUpdate(this.selectedUser)
+  onSubmit(): void {
+    if (this.selectedUser) {
+      this.userService.updateUser(this.selectedUser.id, this.selectedUser).subscribe(
+        updatedUser => {
+          const index = this.users.findIndex(user => user.id === updatedUser.id);
+          if (index !== -1) {
+            this.users[index] = updatedUser;
+          }
+          this.selectedUser = null;
+        },
+        error => console.error('Error updating user', error)
+      );
     }
   }
 }
