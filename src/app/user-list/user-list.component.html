@@ -1,142 +1,143 @@
 
 
 <div *ngIf="users.length > 0" class="mt-6">
-    <h2 class="text-xl font-bold text-gray-700 mb-4">Users List</h2>
-    <ul class="space-y-2">
-      <li *ngFor="let user of users" class="p-4 border border-gray-200 rounded-md">
-        <div class="flex justify-between items-center">
-          <img *ngIf="user.avatar" [src]="user.avatar" alt="Avatar" class="w-10 h-10 rounded-full mr-4">
-          <span>{{ user.name }} ({{ user.occupation }})</span>
-          <div>
-            <button (click)="onUpdate(user)" class="mr-2 px-2 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600">Edit</button>
-            <button (click)="onVerify(user.id)" class="mr-2 px-2 py-1" [ngClass]="{ 'bg-green-500': user.verified, 'bg-red-500': !user.verified }" class="text-white rounded hover:bg-opacity-80">
-              {{ user.verified ? 'Verified' : 'Verify' }}
-            </button>
-            <button (click)="onDelete(user.id)" class="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600">Delete</button>
-            <button (click)="onView(user)" class="ml-2 px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">
-              {{ selectedUser === user ? 'Hide' : 'View' }}
-            </button>
-          </div>
+  <h2 class="text-xl font-bold text-gray-700 mb-4">Users List</h2>
+  <ul class="space-y-2">
+    <li *ngFor="let user of users" class="p-4 border border-gray-200 rounded-md">
+      <div class="flex justify-between items-center">
+        <img *ngIf="user.avatar" [src]="user.avatar" alt="Avatar" class="w-10 h-10 rounded-full mr-4">
+        <span>{{ user.name }} ({{ user.occupation }})</span>
+        <div>
+          <button (click)="onUpdate(user)" class="mr-2 px-2 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600">Edit</button>
+          <button (click)="onVerify(user.id)" class="mr-2 px-2 py-1" [ngClass]="{ 'bg-green-500': user.verified, 'bg-red-500': !user.verified }" class="text-white rounded hover:bg-opacity-80">
+            {{ user.verified ? 'Verified' : 'Verify' }}
+          </button>
+          <button (click)="onDelete(user.id)" class="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600">Delete</button>
+          <button (click)="onView(user)" class="ml-2 px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">
+            {{ selectedUser === user ? 'Hide' : 'View' }}
+          </button>
         </div>
-        <div *ngIf="selectedUser === user" class="mt-6">
-          <h3 class="text-lg font-bold text-gray-700 mb-2">User Details</h3>
-          <p><strong>Name:</strong> {{ user.name }}</p>
-          <p><strong>Email:</strong> {{ user.email }}</p>
-          <p><strong>Phone:</strong> {{ user.phone }}</p>
-          <p><strong>Address:</strong> {{ user.address.city }}, {{ user.address.county }}, {{ user.address.country }}</p>
-          <p><strong>Occupation:</strong> {{ user.occupation }}</p>
-          <p><strong>Age:</strong> {{ user.age }}</p>
-          <p><strong>Company:</strong> {{ user.company }}</p>
-          <p><strong>Skills:</strong> {{ user.skills.join(', ') }}</p>
-          <p><strong>Gender:</strong> {{ user.gender }}</p>
-          <p><strong>County:</strong> {{ user.county }}</p>
-          <p><strong>Biography:</strong> {{ user.biography }}</p>
-          <p><strong>Interests:</strong> {{ user.interests.join(', ') }}</p>
-          <p><strong>Verified:</strong> {{ user.verified ? 'Yes' : 'No' }}</p>
+      </div>
+      <div *ngIf="selectedUser === user" class="mt-6">
+        <h3 class="text-lg font-bold text-gray-700 mb-2">User Details</h3>
+        <p><strong>Name:</strong> {{ user.name }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Phone:</strong> {{ user.phone }}</p>
+        <p><strong>Address:</strong> {{ user.address.city }}, {{ user.address.county }}, {{ user.address.country }}</p>
+        <p><strong>Occupation:</strong> {{ user.occupation }}</p>
+        <p><strong>Age:</strong> {{ user.age }}</p>
+        <p><strong>Company:</strong> {{ user.company }}</p>
+        <p><strong>Skills:</strong> {{ user.skills.join(', ') }}</p>
+        <p><strong>Gender:</strong> {{ user.gender }}</p>
+        <p><strong>County:</strong> {{ user.county }}</p>
+        <p><strong>Biography:</strong> {{ user.biography }}</p>
+        <p><strong>Interests:</strong> {{ user.interests.join(', ') }}</p>
+        <p><strong>Verified:</strong> {{ user.verified ? 'Yes' : 'No' }}</p>
 
-          <div *ngIf="isEditing(user)" class="fixed top-16 right-4 w-full max-w-xs bg-white shadow-md rounded-lg p-6 overflow-y-auto max-h-[calc(100vh-4rem)]">
-            <h1 class="text-2xl font-bold text-blue-300 mb-4">Edit User</h1>
-            <form (ngSubmit)="onSubmit()" #userForm="ngForm" class="space-y-4">
-                <div>
-                    <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-                    <input type="text" id="name" name="name" [(ngModel)]="user.name" #name="ngModel"
-                           class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
-                    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="text-red-500 text-sm">
-                        Name is required.
-                    </div>
-                </div>
-        
-                <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                    <input type="email" id="email" name="email" [(ngModel)]="user.email" #email="ngModel"
-                           class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
-                    <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-red-500 text-sm">
-                        Valid email is required.
-                    </div>
-                </div>
-        
-                <div>
-                    <label for="phone" class="block text-sm font-medium text-gray-700">Phone</label>
-                    <input type="tel" id="phone" name="phone" [(ngModel)]="user.phone"
-                           class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
-                </div>
-        
-                <div>
-                    <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
-                    <textarea id="address" name="address" [(ngModel)]="user.address" rows="3"
-                              class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"></textarea>
-                </div>
-        
-                <div>
-                    <label for="occupation" class="block text-sm font-medium text-gray-700">Occupation</label>
-                    <input type="text" id="occupation" name="occupation" [(ngModel)]="user.occupation"
-                           class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
-                </div>
-        
-                <div>
-                    <label for="age" class="block text-sm font-medium text-gray-700">Age</label>
-                    <input type="number" id="age" name="age" [(ngModel)]="user.age"
-                           class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
-                </div>
-        
-                <div>
-                    <label for="company" class="block text-sm font-medium text-gray-700">Company</label>
-                    <input type="text" id="company" name="company" [(ngModel)]="user.company"
-                           class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
-                </div>
-        
-                <div>
-                    <label for="skills" class="block text-sm font-medium text-gray-700">Skills</label>
-                    <input type="text" id="skills" name="skills" [(ngModel)]="user.skills" 
-                           class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
-                    <p class="text-sm text-gray-500">Separate skills with commas.</p>
-                </div>
-        
-                <div>
-                    <label for="gender" class="block text-sm font-medium text-gray-700">Gender</label>
-                    <select id="gender" name="gender" [(ngModel)]="user.gender"
-                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
-        
-                <div>
-                    <label for="county" class="block text-sm font-medium text-gray-700">County</label>
-                    <input type="text" id="county" name="county" [(ngModel)]="user.county"
-                           class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
-                </div>
-        
-                <div>
-                    <label for="biography" class="block text-sm font-medium text-gray-700">Biography</label>
-                    <textarea id="biography" name="biography" [(ngModel)]="user.biography" rows="3"
-                              class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"></textarea>
-                </div>
-        
-                <div>
-                    <label for="interests" class="block text-sm font-medium text-gray-700">Interests</label>
-                    <input type="text" id="interests" name="interests" [(ngModel)]="user.interests"
-                           class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
-                    <p class="text-sm text-gray-500">Separate interests with commas.</p>
-                </div>
-        
-                <div>
-                    <input type="checkbox" id="verified" name="verified" [(ngModel)]="user.verified" 
-                           class="mr-2">
-                    <label for="verified" class="text-sm font-medium text-gray-700">Verified</label>
-                </div>
-        
-                <button type="submit" [disabled]="userForm.invalid"
-                        class="mt-4 px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700">
-                    Submit
-                </button>
-            </form>
+        <div *ngIf="isEditing(user)" class="fixed top-16 right-4 w-full max-w-xs bg-white shadow-md rounded-lg p-6 overflow-y-auto max-h-[calc(100vh-4rem)]">
+          <h1 class="text-2xl font-bold text-blue-300 mb-4">Edit User</h1>
+          <form (ngSubmit)="onSubmit()" #userForm="ngForm" class="space-y-4">
+            <div>
+              <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+              <input type="text" id="name" name="name" [(ngModel)]="selectedUser.name" #name="ngModel"
+                     class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
+              <div *ngIf="name.invalid && (name.dirty || name.touched)" class="text-red-500 text-sm">
+                Name is required.
+              </div>
+            </div>
+
+            <div>
+              <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+              <input type="email" id="email" name="email" [(ngModel)]="selectedUser.email" #email="ngModel"
+                     class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
+              <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-red-500 text-sm">
+                Valid email is required.
+              </div>
+            </div>
+
+            <div>
+              <label for="phone" class="block text-sm font-medium text-gray-700">Phone</label>
+              <input type="tel" id="phone" name="phone" [(ngModel)]="selectedUser.phone"
+                     class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+            </div>
+
+            <div>
+              <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
+              <textarea id="address" name="address" [(ngModel)]="selectedUser.address" rows="3"
+                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"></textarea>
+            </div>
+
+            <div>
+              <label for="occupation" class="block text-sm font-medium text-gray-700">Occupation</label>
+              <input type="text" id="occupation" name="occupation" [(ngModel)]="selectedUser.occupation"
+                     class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+            </div>
+
+            <div>
+              <label for="age" class="block text-sm font-medium text-gray-700">Age</label>
+              <input type="number" id="age" name="age" [(ngModel)]="selectedUser.age"
+                     class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+            </div>
+
+            <div>
+              <label for="company" class="block text-sm font-medium text-gray-700">Company</label>
+              <input type="text" id="company" name="company" [(ngModel)]="selectedUser.company"
+                     class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+            </div>
+
+            <div>
+              <label for="skills" class="block text-sm font-medium text-gray-700">Skills</label>
+              <input type="text" id="skills" name="skills" [(ngModel)]="selectedUser.skills"
+                     class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+              <p class="text-sm text-gray-500">Separate skills with commas.</p>
+            </div>
+
+            <div>
+              <label for="gender" class="block text-sm font-medium text-gray-700">Gender</label>
+              <select id="gender" name="gender" [(ngModel)]="selectedUser.gender"
+                      class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="county" class="block text-sm font-medium text-gray-700">County</label>
+              <input type="text" id="county" name="county" [(ngModel)]="selectedUser.county"
+                     class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+            </div>
+
+            <div>
+              <label for="biography" class="block text-sm font-medium text-gray-700">Biography</label>
+              <textarea id="biography" name="biography" [(ngModel)]="selectedUser.biography" rows="3"
+                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"></textarea>
+            </div>
+
+            <div>
+              <label for="interests" class="block text-sm font-medium text-gray-700">Interests</label>
+              <input type="text" id="interests" name="interests" [(ngModel)]="selectedUser.interests"
+                     class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+              <p class="text-sm text-gray-500">Separate interests with commas.</p>
+            </div>
+
+            <div>
+              <input type="checkbox" id="verified" name="verified" [(ngModel)]="selectedUser.verified"
+                     class="mr-2">
+              <label for="verified" class="text-sm font-medium text-gray-700">Verified</label>
+            </div>
+
+            <button type="submit" [disabled]="userForm.invalid"
+                    class="mt-4 px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700">
+              Submit
+            </button>
+          </form>
         </div>
-        </div>
-      </li>
-    </ul> 
-  </div>
+      </div>
+    </li>
+  </ul>
+</div>
+
 
   
     

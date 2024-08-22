@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserFormComponent } from './user-form/user-form.component';
-import { UserDetailComponent } from './user-detail/user-detail.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppRoutingModule } from './app-routing.module';  // Import routing module
 import { UserManagementComponent } from './user-management/user-management.component';
@@ -19,7 +18,6 @@ import { UserManagementComponent } from './user-management/user-management.compo
     SideNavComponent,
     UserListComponent,
     UserFormComponent,
-    UserDetailComponent,
     DashboardComponent,
     UserManagementComponent
   ],
@@ -28,7 +26,8 @@ import { UserManagementComponent } from './user-management/user-management.compo
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AppRoutingModule // Add the routing module to imports
+    AppRoutingModule, // Add the routing module to imports
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
