@@ -49,7 +49,7 @@ export class UserService {
     return this.makeRequest<User>('GET', 'users', id);
   }
 
-  createUser(user: User): Observable<User> {
+  createUser(user: Omit<User, 'avatar'>): Observable<User> {
     return this.makeRequest<User>('POST', 'users', undefined, user);
   }
 
