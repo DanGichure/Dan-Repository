@@ -81,9 +81,15 @@ export class UserListComponent implements OnInit {
 
   // Navigate to user details page
   onView(userId: string): void {
-    this.router.navigate(['/user', userId]);
+    // Find the user with the given ID
+    const user = this.allUsers.find(u => u.id === userId);
+    if (user) {
+      this.selectedUser = this.selectedUser === user ? null : user; // Toggle selection
+    }
+    // Navigate to the user details page
+    this.router.navigate(['/users', userId]);
   }
-
+  
   isEditing(user: User): boolean {
     return this.selectedUser === user;
   }
