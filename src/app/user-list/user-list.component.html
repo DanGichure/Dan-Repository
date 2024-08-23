@@ -26,22 +26,7 @@
       </div> 
 
       <!-- User details section -->
-      <div *ngIf="selectedUser === user" class="mt-6">
-        <h3 class="text-lg font-bold text-gray-700 mb-2">User Details</h3>
-        <p><strong>Name:</strong> {{ user.name }}</p>
-        <p><strong>Email:</strong> {{ user.email }}</p>
-        <p><strong>Phone:</strong> {{ user.phone }}</p>
-        <p><strong>Address:</strong> {{ user.address.city }}, {{ user.address.county }}, {{ user.address.country }}</p>
-        <p><strong>Occupation:</strong> {{ user.occupation }}</p>
-        <p><strong>Age:</strong> {{ user.age }}</p>
-        <p><strong>Company:</strong> {{ user.company }}</p>
-        <p><strong>Skills:</strong> {{ user.skills.join(', ') }}</p>
-        <p><strong>Gender:</strong> {{ user.gender }}</p>
-        <p><strong>County:</strong> {{ user.county }}</p>
-        <p><strong>Biography:</strong> {{ user.biography }}</p>
-        <p><strong>Interests:</strong> {{ user.interests.join(', ') }}</p>
-        <p><strong>Verified:</strong> {{ user.verified ? 'Yes' : 'No' }}</p>
-      </div>
+      
 
       <!-- Edit user form section -->
       <div *ngIf="isEditing(user)" class="fixed top-16 right-4 w-full max-w-xs bg-white shadow-md rounded-lg p-6 overflow-y-auto max-h-[calc(100vh-4rem)]">
