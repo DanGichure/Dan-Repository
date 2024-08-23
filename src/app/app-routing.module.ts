@@ -8,10 +8,10 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'users', component: UserManagementComponent},
   { path: 'users/:id', component: UserDetailsComponent },
   { path: 'users/verified', component: UserListComponent },
   { path: 'users/unverified', component: UserListComponent },
+  { path: 'users', component: UserManagementComponent},
 ];
 
 @NgModule({

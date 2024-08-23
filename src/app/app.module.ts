@@ -12,6 +12,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppRoutingModule } from './app-routing.module';  // Import routing module
 import { UserManagementComponent } from './user-management/user-management.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
+import { routes } from './app.routes';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { UserDetailsComponent } from './user-details/user-details.component';
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule, // Add the routing module to imports
-    RouterModule
+    RouterModule.forRoot(routes)
   ],
   providers: [],
   bootstrap: [AppComponent]
