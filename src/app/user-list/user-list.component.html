@@ -2,12 +2,12 @@
 
 <div *ngIf="users.length > 0" class="mt-6">
   <h2 class="text-xl font-bold text-gray-700 mb-4">Users List</h2>
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"> <!-- Grid container with responsive columns and gap -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4"> <!-- Grid container with responsive columns and gap -->
     <div *ngFor="let user of users" class="bg-white border border-gray-200 rounded-md p-4 shadow-sm hover:bg-gray-100 transition-colors">
-      <div class="flex justify-between items-center">
+      <div class="flex flex-col">
         <span>{{ user.avatar }}</span> 
-        <span>{{ user.name }}</span> 
-        <span>({{ user.occupation }})</span>
+        <span class="text-lg font-bold text-gray-900">{{ user.name }}</span> <!-- Bolded name -->
+        <span class="text-sm text-gray-600">{{ user.occupation }}</span> 
         <div>
           <!-- View button always visible -->
           <button (click)="onView(user.id)" class="ml-2 px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">
