@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../../models/user';
 
 @Component({
@@ -13,7 +13,11 @@ export class UserListComponent implements OnInit {
   allUsers: User[] = [];
   selectedUser: User | null = null;
 
-  constructor(private userService: UserService, private route: ActivatedRoute) { }
+  constructor(
+    private userService: UserService,
+    private route: ActivatedRoute,
+    private router: Router // Inject Router service
+  ) { }
 
   ngOnInit(): void {
     this.loadUsers();
@@ -22,7 +26,7 @@ export class UserListComponent implements OnInit {
   loadUsers(): void {
     this.userService.getUsers().subscribe(users => {
       this.allUsers = users;
-    this.filterUsers();
+      this.filterUsers();
     });
   }
 
@@ -75,8 +79,9 @@ export class UserListComponent implements OnInit {
     );
   }
 
-  onView(user: User): void {
-    this.selectedUser = this.selectedUser === user ? null : user;
+  // Navigate to user details page
+  onView(userId: string): void {
+    this.router.navigate(['/user', userId]);
   }
 
   isEditing(user: User): boolean {
@@ -98,6 +103,4 @@ export class UserListComponent implements OnInit {
       );
     }
   }
-
-
 }

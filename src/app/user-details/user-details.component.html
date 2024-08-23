@@ -1,0 +1,17 @@
+<div *ngIf="user">
+    <h1 class="text-2xl font-bold text-blue-300 mb-4">User Details</h1>
+    <p><strong>Name:</strong> {{ user.name }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Phone:</strong> {{ user.phone }}</p>
+    <p><strong>Address:</strong> {{ user.address.city }}, {{ user.address.county }}, {{ user.address.country }}</p>
+    <p><strong>Occupation:</strong> {{ user.occupation }}</p>
+    <p><strong>Age:</strong> {{ user.age }}</p>
+    <p><strong>Company:</strong> {{ user.company }}</p>
+    <p><strong>Skills:</strong> {{ user.skills.join(', ') }}</p>
+    <p><strong>Gender:</strong> {{ user.gender }}</p>
+    <p><strong>County:</strong> {{ user.county }}</p>
+    <p><strong>Biography:</strong> {{ user.biography }}</p>
+    <p><strong>Interests:</strong> {{ user.interests.join(', ') }}</p>
+    <p><strong>Verified:</strong> {{ user.verified ? 'Yes' : 'No' }}</p>
+  </div>
+  
