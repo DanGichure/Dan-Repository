@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { UserService } from '../user.service';
 import { User } from '../../models/user';
 
@@ -14,7 +13,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private router: Router
+    
   ) { }
 
   ngOnInit(): void {
@@ -36,10 +35,6 @@ export class DashboardComponent implements OnInit {
     } else if (filter === 'unverified') {
       this.users = this.allUsers.filter(user => !user.verified);
     }
-  }
-
-  onView(userId: string): void {
-    this.router.navigate(['/users', userId]);
   }
 }
 
