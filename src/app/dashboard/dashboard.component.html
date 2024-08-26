@@ -1,1 +1,28 @@
-<p>dashboard works!</p>
+<div class="p-4">
+    <h1 class="text-3xl font-bold text-blue-300 mb-6">User Dashboard</h1>
+  
+    <div class="flex space-x-4 mb-6">
+      <button (click)="setFilter('all')" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        All Users
+      </button>
+      <button (click)="setFilter('verified')" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400">
+        Verified Users
+      </button>
+      <button (click)="setFilter('unverified')" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400">
+        Unverified Users
+      </button>
+    </div>
+  
+    <div *ngIf="users.length === 0" class="text-gray-500">No users found.</div>
+    <ul class="space-y-4">
+      <li *ngFor="let user of users" class="p-4 border border-gray-200 rounded-lg shadow-sm">
+        <p class="text-lg font-semibold">{{ user.name }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Status:</strong> {{ user.verified ? 'Verified' : 'Unverified' }}</p>
+        <button (click)="onView(user.id)" class="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">
+          View Details
+        </button>
+      </li>
+    </ul>
+  </div>
+  
