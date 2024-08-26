@@ -1,9 +1,15 @@
+<!-- Modal Trigger Button -->
 <div class="fixed top-4 right-4 z-50">
-    <button (click)="toggleDropdown()" type="button" 
+    <button (click)="toggleModal()" type="button" 
             class="px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700">
         + Add User
     </button>
-    <div *ngIf="isDropdownOpen" class="fixed top-16 right-4 w-full max-w-xs bg-white shadow-md rounded-lg p-6 overflow-y-auto max-h-[calc(100vh-4rem)]">
+</div>
+
+<!-- Modal Overlay -->
+<div *ngIf="isModalOpen" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-40" (click)="toggleModal()">
+    <!-- Modal Content -->
+    <div (click)="$event.stopPropagation()" class="bg-white shadow-md rounded-lg p-6 w-full max-w-lg max-h-[calc(100vh-4rem)] overflow-y-auto">
         <h1 class="text-2xl font-bold text-blue-300 mb-4">Create New User</h1>
         <form (ngSubmit)="onSubmit()" #userForm="ngForm" class="space-y-4">
             <div>
@@ -35,7 +41,7 @@
                 <textarea id="address" name="address" [(ngModel)]="user.address" #address="ngModel" rows="3"
                           class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required></textarea>
                 <div *ngIf="address.invalid && (address.dirty || address.touched)" class="text-red-500 text-sm">
-                            Valid address is required.
+                    Address is required.
                 </div>
             </div>
 
@@ -44,7 +50,7 @@
                 <input type="text" id="occupation" name="occupation" [(ngModel)]="user.occupation" #occupation="ngModel"
                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
                 <div *ngIf="occupation.invalid && (occupation.dirty || occupation.touched)" class="text-red-500 text-sm">
-                        Valid occupation is required.
+                    Occupation is required.
                 </div>
             </div>
 
@@ -109,6 +115,7 @@
         </form>
     </div>
 </div>
+
 
 
 

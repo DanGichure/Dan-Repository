@@ -11,7 +11,7 @@ import { User } from '../../models/user';
 export class UserDetailsComponent implements OnInit {
   userId: string | null = null;
   user: User | null = null;
-  isEditing: boolean = false; // Flag to show/hide the edit form
+  isEditing: boolean = false; // Flag to show/hide the modal
 
   constructor(
     private route: ActivatedRoute,
@@ -36,13 +36,11 @@ export class UserDetailsComponent implements OnInit {
   }
 
   toggleEditForm(): void {
-    this.isEditing = !this.isEditing; // Toggle the visibility of the edit form
+    this.isEditing = !this.isEditing; // Toggle the visibility of the modal
   }
 
   onUpdate(): void {
-    if (this.user) {
-      this.toggleEditForm(); // Show the form when the button is clicked
-    }
+    this.toggleEditForm(); // Show the modal when the button is clicked
   }
 
   onDelete(): void {
@@ -74,7 +72,7 @@ export class UserDetailsComponent implements OnInit {
       this.userService.updateUser(this.user.id, this.user).subscribe(
         updatedUser => {
           this.user = updatedUser;
-          this.isEditing = false; // Hide the form after successful update
+          this.isEditing = false; // Hide the modal after successful update
         },
         error => console.error('Error updating user', error)
       );

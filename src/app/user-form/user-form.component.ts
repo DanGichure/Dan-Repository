@@ -7,7 +7,7 @@ import { User } from '../../models/user';
   styleUrls: ['./user-form.component.css']
 })
 export class UserFormComponent {
-  isDropdownOpen = false;
+  isModalOpen = false;
   user: User = {
     name: '',
     email: '',
@@ -28,45 +28,45 @@ export class UserFormComponent {
     interests: [],
     verified: false,
     id: '',
-    createdAt: new Date,
+    createdAt: new Date(),
     avatar: ''
   };
 
-  toggleDropdown() {
-    this.isDropdownOpen = !this.isDropdownOpen;
-  }
-
   @Output() userCreated = new EventEmitter<User>();
+
+  toggleModal() {
+    this.isModalOpen = !this.isModalOpen;
+  }
 
   onSubmit(): void {
     this.userCreated.emit(this.user);
     this.resetForm();
-    this.isDropdownOpen = false;
+    this.toggleModal(); // Close modal after submission
   }
 
   private resetForm(): void {
     this.user = {
       name: '',
-    email: '',
-    phone: '',
-    address: {
-      city: '',
-      postalCode: '',
+      email: '',
+      phone: '',
+      address: {
+        city: '',
+        postalCode: '',
+        county: '',
+        country: ''
+      },
+      occupation: '',
+      age: null,
+      company: '',
+      skills: [],
+      gender: 'Male',
       county: '',
-      country: ''
-    },
-    occupation: '',
-    age: null,
-    company: '',
-    skills: [],
-    gender: 'Male',
-    county: '',
-    biography: '',
-    interests: [],
-    verified: false,
-    id: '',
-    createdAt: new Date,
-    avatar: ''
+      biography: '',
+      interests: [],
+      verified: false,
+      id: '',
+      createdAt: new Date(),
+      avatar: ''
     };
   }
 }
