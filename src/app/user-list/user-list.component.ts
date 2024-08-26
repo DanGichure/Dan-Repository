@@ -52,20 +52,6 @@ export class UserListComponent implements OnInit {
     );
   }
 
-  onDelete(userId: string): void {
-    this.userService.deleteUser(userId).subscribe(
-      () => {
-        this.allUsers = this.allUsers.filter(user => user.id !== userId);
-        this.filterUsers();
-      },
-      error => console.error('Error deleting user', error)
-    );
-  }
-
-  onUpdate(user: User): void {
-    this.selectedUser = { ...user }; // Ensure we're editing a copy of the user
-  }
-
   onVerify(userId: string): void {
     this.userService.verifyUser(userId).subscribe(
       () => {
@@ -90,23 +76,4 @@ export class UserListComponent implements OnInit {
     this.router.navigate(['/users', userId]);
   }
   
-  isEditing(user: User): boolean {
-    return this.selectedUser === user;
-  }
-
-  onSubmit(): void {
-    if (this.selectedUser) {
-      this.userService.updateUser(this.selectedUser.id, this.selectedUser).subscribe(
-        updatedUser => {
-          const index = this.allUsers.findIndex(user => user.id === updatedUser.id);
-          if (index !== -1) {
-            this.allUsers[index] = updatedUser;
-            this.filterUsers();
-          }
-          this.selectedUser = null; // Close the form after submitting
-        },
-        error => console.error('Error updating user', error)
-      );
-    }
-  }
 }
