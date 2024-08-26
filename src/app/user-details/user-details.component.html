@@ -34,6 +34,23 @@
     </button>
   </div>
 
+  <!-- Confirmation Dialog -->
+  <div *ngIf="showConfirmDialog" class="fixed inset-0 flex items-center justify-center z-50">
+    <div class="bg-white p-6 rounded shadow-lg">
+      <p class="mb-4 text-lg">Are you sure you want to delete this user?</p>
+      <div class="flex space-x-2">
+        <button (click)="handleDeleteConfirmation(true)"
+                class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400">
+          Yes
+        </button>
+        <button (click)="handleDeleteConfirmation(false)"
+                class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-400">
+          No
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Modal for Update Form -->
   <div *ngIf="isEditing" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50" (click)="toggleEditForm()">
     <div (click)="$event.stopPropagation()" class="bg-white shadow-md rounded-lg p-6 w-full max-w-lg max-h-[calc(100vh-4rem)] overflow-y-auto">

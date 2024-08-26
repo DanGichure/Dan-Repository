@@ -11,7 +11,8 @@ import { User } from '../../models/user';
 export class UserDetailsComponent implements OnInit {
   userId: string | null = null;
   user: User | null = null;
-  isEditing: boolean = false; // Flag to show/hide the modal
+  isEditing: boolean = false; // Flag to show/hide the edit form
+  showConfirmDialog: boolean = false; // Flag to show/hide the confirmation dialog
 
   constructor(
     private route: ActivatedRoute,
@@ -36,15 +37,20 @@ export class UserDetailsComponent implements OnInit {
   }
 
   toggleEditForm(): void {
-    this.isEditing = !this.isEditing; // Toggle the visibility of the modal
+    this.isEditing = !this.isEditing; // Toggle the visibility of the edit form
   }
 
   onUpdate(): void {
-    this.toggleEditForm(); // Show the modal when the button is clicked
+    this.toggleEditForm(); // Show the edit form
   }
 
   onDelete(): void {
-    if (this.user) {
+    this.showConfirmDialog = true; // Show the confirmation dialog
+  }
+
+  handleDeleteConfirmation(confirmed: boolean): void {
+    this.showConfirmDialog = false; // Hide the confirmation dialog
+    if (confirmed && this.user) {
       this.userService.deleteUser(this.user.id).subscribe(
         () => {
           this.router.navigate(['/users']);
@@ -72,11 +78,10 @@ export class UserDetailsComponent implements OnInit {
       this.userService.updateUser(this.user.id, this.user).subscribe(
         updatedUser => {
           this.user = updatedUser;
-          this.isEditing = false; // Hide the modal after successful update
+          this.isEditing = false; // Hide the edit form after successful update
         },
         error => console.error('Error updating user', error)
       );
     }
   }
 }
-
