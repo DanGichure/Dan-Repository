@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
 import { UserService } from '../user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../../models/user';
@@ -16,7 +16,8 @@ export class UserListComponent implements OnInit {
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
-    private router: Router // Inject Router service
+    private router: Router,
+    private cdr: ChangeDetectorRef // Inject ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
@@ -27,6 +28,7 @@ export class UserListComponent implements OnInit {
     this.userService.getUsers().subscribe(users => {
       this.allUsers = users;
       this.filterUsers();
+      this.cdr.detectChanges(); // Manually trigger change detection
     });
   }
 
@@ -38,42 +40,29 @@ export class UserListComponent implements OnInit {
     } else if (path === 'users/unverified') {
       this.users = this.allUsers.filter(user => !user.verified);
     } else {
-      this.users = this.allUsers; // Default to all users if no specific path
+      this.users = [...this.allUsers]; // Create a new array to ensure change detection
     }
+    this.cdr.detectChanges(); // Manually trigger change detection
   }
 
   onUserCreated(user: User): void {
     this.userService.createUser(user).subscribe(
       newUser => {
-        this.allUsers.push(newUser);
+        this.allUsers = [...this.allUsers, newUser]; // Use a new array to trigger change detection
         this.filterUsers();
+        this.cdr.detectChanges(); // Manually trigger change detection
       },
       error => console.error('Error creating user', error)
     );
   }
 
-  onVerify(userId: string): void {
-    this.userService.verifyUser(userId).subscribe(
-      () => {
-        const user = this.allUsers.find(user => user.id === userId);
-        if (user) {
-          user.verified = !user.verified;
-          this.filterUsers();
-        }
-      },
-      error => console.error('Error verifying user', error)
-    );
-  }
+  
 
-  // Navigate to user details page
   onView(userId: string): void {
-    // Find the user with the given ID
     const user = this.allUsers.find(u => u.id === userId);
     if (user) {
       this.selectedUser = this.selectedUser === user ? null : user; // Toggle selection
     }
-    // Navigate to the user details page
     this.router.navigate(['/users', userId]);
   }
-  
 }
