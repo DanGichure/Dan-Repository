@@ -1,20 +1,24 @@
-import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { UserService } from '../user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../../models/user';
+import { NotificationService } from '../notification.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.css']
 })
-export class UserListComponent implements OnInit {
+export class UserListComponent implements OnInit, OnDestroy {
   @Input() users: User[] = [];
   allUsers: User[] = [];
   selectedUser: User | null = null;
+  private subscription: Subscription = new Subscription();
 
   constructor(
     private userService: UserService,
+    private notificationService: NotificationService,
     private route: ActivatedRoute,
     private router: Router,
     private cdr: ChangeDetectorRef // Inject ChangeDetectorRef
@@ -22,7 +26,19 @@ export class UserListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadUsers();
+    // Subscribe to the refresh notifications
+    this.subscription.add(
+      this.notificationService.refresh$.subscribe(() => {
+        this.loadUsers();
+      })
+    );
   }
+
+  ngOnDestroy(): void {
+    // Clean up the subscription to avoid memory leaks
+    this.subscription.unsubscribe();
+  }
+
 
   loadUsers(): void {
     this.userService.getUsers().subscribe(users => {

@@ -14,6 +14,7 @@ import { UserManagementComponent } from './user-management/user-management.compo
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { routes } from './app.routes';
 import { UserService } from './user.service';
+import { NotificationService } from './notification.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import { UserService } from './user.service';
     AppRoutingModule, // Add the routing module to imports
     RouterModule.forRoot(routes),
   ],
-  providers: [UserService],
+  providers: [UserService, NotificationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -9,8 +9,20 @@ import { UserService } from '../user.service';
 })
 export class UserManagementComponent {
   users: User[] = [];
+  searchTerm: string = '';
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService) {
+    this.loadUsers();
+  }
+
+  loadUsers(): void {
+    this.userService.getUsers().subscribe(
+      users => {
+        this.users = users;
+      },
+      error => console.error('Error loading users', error)
+    );
+  }
 
   onUserCreated(user: User): void {
     this.userService.createUser(user).subscribe(
@@ -20,6 +32,14 @@ export class UserManagementComponent {
       error => console.error('Error creating user', error)
     );
   }
+
+  get filteredUsers(): User[] {
+    if (!this.searchTerm.trim()) {
+      return this.users;
+    }
+    const searchTermLower = this.searchTerm.toLowerCase();
+    return this.users.filter(user =>
+      user.name.toLowerCase().includes(searchTermLower)
+    );
+  }
 }
-
-

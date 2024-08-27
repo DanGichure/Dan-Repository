@@ -1,8 +1,16 @@
 <div>
-    <h1 class="text-3xl font-bold text-blue-600 mb-4">User Management</h1>
-    <app-user-form (userCreated)="onUserCreated($event)"></app-user-form>
+  <h1 class="text-3xl font-bold text-blue-600 mb-4">User Management</h1>
+  <app-user-form (userCreated)="onUserCreated($event)"></app-user-form>
 </div>
-  <div>
-    <app-user-list [users]="users"></app-user-list>
-  </div>
+
+<div>
+  <input
+    type="text"
+    placeholder="Search users by name..."
+    [(ngModel)]="searchTerm"
+    class="mb-4 p-2 border border-gray-300 rounded"
+  />
+  <app-user-list [users]="filteredUsers"></app-user-list>
+</div>
+
   
