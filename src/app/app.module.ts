@@ -13,6 +13,7 @@ import { AppRoutingModule } from './app-routing.module';  // Import routing modu
 import { UserManagementComponent } from './user-management/user-management.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { routes } from './app.routes';
+import { UserService } from './user.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { routes } from './app.routes';
     UserFormComponent,
     DashboardComponent,
     UserManagementComponent,
-    UserDetailsComponent
+    UserDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,9 +31,9 @@ import { routes } from './app.routes';
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule, // Add the routing module to imports
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
