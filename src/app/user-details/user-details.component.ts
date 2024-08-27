@@ -11,8 +11,12 @@ import { User } from '../../models/user';
 export class UserDetailsComponent implements OnInit {
   userId: string | null = null;
   user: User | null = null;
-  isEditing: boolean = false; // Flag to show/hide the edit form
-  showConfirmDialog: boolean = false; // Flag to show/hide the confirmation dialog
+  isEditing: boolean = false;
+  showConfirmDialog: boolean = false;
+  
+  // Temporary variables for skills and interests
+  skillsInput: string = '';
+  interestsInput: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -31,25 +35,30 @@ export class UserDetailsComponent implements OnInit {
     this.userService.getUser(userId).subscribe(
       (user: User) => {
         this.user = user;
+        // Populate temporary input fields
+        if (this.user) {
+          this.skillsInput = this.user.skills.join(', ');
+          this.interestsInput = this.user.interests.join(', ');
+        }
       },
       error => console.error('Error fetching user details', error)
     );
   }
 
   toggleEditForm(): void {
-    this.isEditing = !this.isEditing; // Toggle the visibility of the edit form
+    this.isEditing = !this.isEditing;
   }
 
   onUpdate(): void {
-    this.toggleEditForm(); // Show the edit form
+    this.toggleEditForm();
   }
 
   onDelete(): void {
-    this.showConfirmDialog = true; // Show the confirmation dialog
+    this.showConfirmDialog = true;
   }
 
   handleDeleteConfirmation(confirmed: boolean): void {
-    this.showConfirmDialog = false; // Hide the confirmation dialog
+    this.showConfirmDialog = false;
     if (confirmed && this.user) {
       this.userService.deleteUser(this.user.id).subscribe(
         () => {
@@ -75,17 +84,20 @@ export class UserDetailsComponent implements OnInit {
 
   onSubmit(): void {
     if (this.user) {
+      // Convert comma-separated values back to arrays
+      this.user.skills = this.skillsInput.split(',').map(skill => skill.trim()).filter(skill => skill !== '');
+      this.user.interests = this.interestsInput.split(',').map(interest => interest.trim()).filter(interest => interest !== '');
+
       this.userService.updateUser(this.user.id, this.user).subscribe(
         updatedUser => {
           this.user = updatedUser;
-          this.isEditing = false; // Hide the edit form after successful update
+          this.isEditing = false;
         },
         error => console.error('Error updating user', error)
       );
     }
   }
 
-  // New method to handle back navigation
   goBack(): void {
     this.router.navigate(['/users']);
   }

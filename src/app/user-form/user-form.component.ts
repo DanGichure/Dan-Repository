@@ -8,6 +8,11 @@ import { User } from '../../models/user';
 })
 export class UserFormComponent {
   isModalOpen = false;
+  
+  // Temporary variables for input
+  skillsInput: string = '';
+  interestsInput: string = '';
+
   user: User = {
     name: '',
     email: '',
@@ -39,7 +44,14 @@ export class UserFormComponent {
   }
 
   onSubmit(): void {
+    // Convert comma-separated skills and interests into arrays
+    this.user.skills = this.skillsInput.split(',').map(skill => skill.trim()).filter(skill => skill !== '');
+    this.user.interests = this.interestsInput.split(',').map(interest => interest.trim()).filter(interest => interest !== '');
+    
+    // Emit the user object
     this.userCreated.emit(this.user);
+
+    // Reset form
     this.resetForm();
     this.toggleModal(); // Close modal after submission
   }
@@ -68,5 +80,9 @@ export class UserFormComponent {
       createdAt: new Date(),
       avatar: ''
     };
+
+    // Reset temporary input fields
+    this.skillsInput = '';
+    this.interestsInput = '';
   }
 }

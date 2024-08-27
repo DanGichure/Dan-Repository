@@ -5,7 +5,7 @@
       <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
       </svg>
-      <span>Back to User List</span>
+      <span>Back to Users</span>
     </button>
   </div>
 
@@ -83,10 +83,29 @@
         </div>
 
         <div>
-          <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
-          <textarea id="address" name="address" [(ngModel)]="user.address" rows="3"
-                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"></textarea>
-        </div>
+          <label for="address-city" class="block text-sm font-medium text-gray-700">City</label>
+          <input type="text" id="address-city" name="city" [(ngModel)]="user.address.city" #city="ngModel"
+                 class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
+      </div>
+
+      <div>
+          <label for="address-postalCode" class="block text-sm font-medium text-gray-700">Postal Code</label>
+          <input type="text" id="address-postalCode" name="postalCode" [(ngModel)]="user.address.postalCode" #postalCode="ngModel"
+                 class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
+      </div>
+
+      <div>
+          <label for="address-county" class="block text-sm font-medium text-gray-700">County</label>
+          <input type="text" id="address-county" name="county" [(ngModel)]="user.address.county" #addressCounty="ngModel"
+                 class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
+      </div>
+
+      <div>
+          <label for="address-country" class="block text-sm font-medium text-gray-700">Country</label>
+          <input type="text" id="address-country" name="country" [(ngModel)]="user.address.country" #addressCountry="ngModel"
+                 class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
+      </div>
+
 
         <div>
           <label for="occupation" class="block text-sm font-medium text-gray-700">Occupation</label>
@@ -108,7 +127,7 @@
 
         <div>
           <label for="skills" class="block text-sm font-medium text-gray-700">Skills</label>
-          <input type="text" id="skills" name="skills" [(ngModel)]="user.skills"
+          <input type="text" id="skills" name="skills" [(ngModel)]="skillsInput"
                  class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
           <p class="text-sm text-gray-500">Separate skills with commas.</p>
         </div>
@@ -137,7 +156,7 @@
 
         <div>
           <label for="interests" class="block text-sm font-medium text-gray-700">Interests</label>
-          <input type="text" id="interests" name="interests" [(ngModel)]="user.interests"
+          <input type="text" id="interests" name="interests" [(ngModel)]="interestsInput"
                  class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
           <p class="text-sm text-gray-500">Separate interests with commas.</p>
         </div>
