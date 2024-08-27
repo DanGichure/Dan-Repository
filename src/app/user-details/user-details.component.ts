@@ -84,4 +84,9 @@ export class UserDetailsComponent implements OnInit {
       );
     }
   }
+
+  // New method to handle back navigation
+  goBack(): void {
+    this.router.navigate(['/users']);
+  }
 }

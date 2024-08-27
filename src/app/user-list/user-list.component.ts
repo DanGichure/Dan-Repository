@@ -43,29 +43,16 @@ export class UserListComponent implements OnInit, OnDestroy {
   loadUsers(): void {
     this.userService.getUsers().subscribe(users => {
       this.allUsers = users;
-      this.filterUsers();
       this.cdr.detectChanges(); // Manually trigger change detection
     });
   }
 
-  filterUsers(): void {
-    const path = this.route.snapshot.url.map(segment => segment.toString()).join('/');
-    console.log('Current route path:', path); // Log to verify path
-    if (path === 'users/verified') {
-      this.users = this.allUsers.filter(user => user.verified);
-    } else if (path === 'users/unverified') {
-      this.users = this.allUsers.filter(user => !user.verified);
-    } else {
-      this.users = [...this.allUsers]; // Create a new array to ensure change detection
-    }
-    this.cdr.detectChanges(); // Manually trigger change detection
-  }
+  
 
   onUserCreated(user: User): void {
     this.userService.createUser(user).subscribe(
       newUser => {
         this.allUsers = [...this.allUsers, newUser]; // Use a new array to trigger change detection
-        this.filterUsers();
         this.cdr.detectChanges(); // Manually trigger change detection
       },
       error => console.error('Error creating user', error)
