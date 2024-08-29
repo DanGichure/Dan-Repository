@@ -21,51 +21,53 @@ export class UserListComponent implements OnInit, OnDestroy {
     private notificationService: NotificationService,
     private route: ActivatedRoute,
     private router: Router,
-    private cdr: ChangeDetectorRef // Inject ChangeDetectorRef
+    private cdr: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
     this.loadUsers();
+    
     // Subscribe to the refresh notifications
     this.subscription.add(
       this.notificationService.refresh$.subscribe(() => {
         this.loadUsers();
       })
     );
+
+    // Subscribe to route changes
+    this.subscription.add(
+      this.route.url.subscribe(() => {
+      })
+    );
   }
 
   ngOnDestroy(): void {
-    // Clean up the subscription to avoid memory leaks
     this.subscription.unsubscribe();
   }
-
 
   loadUsers(): void {
     this.userService.getUsers().subscribe(users => {
       this.allUsers = users;
-      this.cdr.detectChanges(); // Manually trigger change detection
+      this.cdr.detectChanges(); 
     });
   }
-
-  
 
   onUserCreated(user: User): void {
     this.userService.createUser(user).subscribe(
       newUser => {
-        this.allUsers = [...this.allUsers, newUser]; // Use a new array to trigger change detection
-        this.cdr.detectChanges(); // Manually trigger change detection
+        this.allUsers = [...this.allUsers, newUser];
+        this.cdr.detectChanges();
       },
       error => console.error('Error creating user', error)
     );
   }
 
-  
-
   onView(userId: string): void {
     const user = this.allUsers.find(u => u.id === userId);
     if (user) {
-      this.selectedUser = this.selectedUser === user ? null : user; // Toggle selection
+      this.selectedUser = this.selectedUser === user ? null : user;
     }
     this.router.navigate(['/users', userId]);
   }
+
 }
