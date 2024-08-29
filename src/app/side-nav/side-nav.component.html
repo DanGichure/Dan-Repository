@@ -1,16 +1,38 @@
-<!-- Layout Component -->
 <div class="flex">
   <!-- Side Navigation Component -->
-  <nav class="bg-gray-800 text-white w-64 space-y-6 p-4 h-full fixed z-20">
-    <h1 class="text-2xl font-bold mb-4">Admin Dashboard</h1>
-    <ul>
+  <nav 
+    [ngClass]="{
+      'w-64': !isNavCollapsed,
+      'w-16': isNavCollapsed,
+      'lg:w-64': true,
+      'lg:fixed': true,
+      'lg:relative': false
+    }"
+    class="bg-gray-800 text-white space-y-6 p-4 h-full fixed lg:relative z-20 transition-all duration-300 ease-in-out"
+  >
+    <!-- Hamburger Menu Button (visible only on small screens) -->
+    <button (click)="toggleNav()" class="lg:hidden text-white absolute top-4 right-4">
+      <span class="material-icons">menu</span>
+    </button>
+    
+    <!-- Dashboard Title (visible only when expanded) -->
+    <h1 class="text-2xl font-bold mb-4 lg:block hidden">Admin Dashboard</h1>
+    
+    <ul [ngClass]="{ 'hidden': isNavCollapsed, 'block': !isNavCollapsed, 'lg:block': true }">
       <li><a routerLink="/dashboard" routerLinkActive="text-blue-400">Dashboard</a></li>
       <li><a routerLink="/users" routerLinkActive="text-blue-400">User Management</a></li>
     </ul>
   </nav>
 
   <!-- Main Content Component -->
-  <div class="ml-64 p-4 flex-1"> <!-- Margin-left to account for the side navigation width -->
-    <router-outlet></router-outlet> <!-- This is where your routed components will be displayed -->
+  <div 
+    [ngClass]="{
+      'ml-16': isNavCollapsed,
+      'ml-64': !isNavCollapsed,
+      'lg:ml-64': true
+    }"
+    class="p-4 flex-1 transition-all duration-300 ease-in-out"
+  >
+    <router-outlet></router-outlet> <!-- Routed components will be displayed here -->
   </div>
-</div> 
+</div>

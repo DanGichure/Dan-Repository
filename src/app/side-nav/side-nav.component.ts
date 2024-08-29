@@ -6,10 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./side-nav.component.css']
 })
 export class SideNavComponent {
-  isCollapsed: boolean = true;
+  isNavCollapsed: boolean = true;
 
   toggleNav(): void {
-    this.isCollapsed = !this.isCollapsed;
+    this.isNavCollapsed = !this.isNavCollapsed;
   }
 }
 
