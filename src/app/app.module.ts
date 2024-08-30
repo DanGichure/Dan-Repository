@@ -15,6 +15,8 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 import { routes } from './app.routes';
 import { UserService } from './user.service';
 import { NotificationService } from './notification.service';
+import { VerifiedUsersComponent } from './verified-users/verified-users.component';
+import { UnverifiedUsersComponent } from './unverified-users/unverified-users.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { NotificationService } from './notification.service';
     DashboardComponent,
     UserManagementComponent,
     UserDetailsComponent,
+    VerifiedUsersComponent,
+    UnverifiedUsersComponent
   ],
   imports: [
     BrowserModule,

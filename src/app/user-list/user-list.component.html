@@ -3,18 +3,27 @@
 <div *ngIf="users.length > 0" class="mt-6">
   <h2 class="text-xl font-bold text-gray-700 mb-4">Users</h2>
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4"> <!-- Grid container with responsive columns and gap -->
-    <div *ngFor="let user of users" class="bg-white border border-gray-200 rounded-md p-4 shadow-sm hover:bg-gray-100 transition-colors">
-      <div class="flex flex-col">
-        <span class="text-lg font-bold text-gray-900">{{ user.name }}</span> <!-- Bolded name -->
-        <span class="text-sm text-gray-600">{{ user.occupation }}</span> 
-        <div>
-          <!-- View button always visible -->
-          <button (click)="onView(user.id)" class="ml-2 px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">
-            {{ selectedUser === user ? 'Hide' : 'View' }}
-          </button>
+    <div *ngFor="let user of users" class="flex flex-col bg-white border border-gray-200 rounded-md p-4 shadow-sm hover:bg-gray-50 transition-colors">
+      <div class="flex items-center mb-4">
+        <div class="flex-shrink-0 w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center text-white font-bold text-xl">
+          {{ user.name[0] }}
         </div>
-      </div>       
+        <div class="ml-4 flex-1">
+          <span class="text-lg font-bold text-gray-900">{{ user.name }}</span>
+          <span class="text-sm text-gray-600 block">{{ user.occupation }}</span>
+        </div>
+      </div>
+      <div class="flex justify-end mt-auto pt-4 border-t border-gray-200">
+        <!-- View button with fixed position at the bottom -->
+        <button (click)="onView(user.id)" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">
+          {{ selectedUser === user ? 'Hide' : 'View' }}
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
+
+
 
 
 
