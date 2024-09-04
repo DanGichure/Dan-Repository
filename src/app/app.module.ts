@@ -17,6 +17,7 @@ import { UserService } from './user.service';
 import { NotificationService } from './notification.service';
 import { VerifiedUsersComponent } from './verified-users/verified-users.component';
 import { UnverifiedUsersComponent } from './unverified-users/unverified-users.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { UnverifiedUsersComponent } from './unverified-users/unverified-users.co
     UserManagementComponent,
     UserDetailsComponent,
     VerifiedUsersComponent,
-    UnverifiedUsersComponent
+    UnverifiedUsersComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

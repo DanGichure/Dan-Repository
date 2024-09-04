@@ -5,6 +5,7 @@ import { UserManagementComponent } from './user-management/user-management.compo
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { VerifiedUsersComponent } from './verified-users/verified-users.component';
 import { UnverifiedUsersComponent } from './unverified-users/unverified-users.component';
+import { SettingsComponent } from './settings/settings.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'users', component: UserManagementComponent},
   { path: 'verified-users', component: VerifiedUsersComponent },
   { path: 'unverified-users', component: UnverifiedUsersComponent },
+  { path: 'settings', component: SettingsComponent },
   { path: '**', redirectTo: 'dashboard' } // fallback route
 ];
 
