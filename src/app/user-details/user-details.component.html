@@ -1,7 +1,7 @@
 <div *ngIf="user">
   <!-- Back Arrow Button -->
   <div class="mb-4">
-    <button (click)="goBack()" class="flex items-center text-blue-500 hover:text-blue-700">
+    <button (click)="goBack()" class="flex items-center text-blue-500 hover:text-blue-700 dark:text-blue-300 dark:hover:text-blue-400">
       <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
       </svg>
@@ -10,43 +10,43 @@
   </div>
 
   <!-- User Details Section -->
-  <h1 class="text-2xl font-bold text-blue-300 mb-4">User Details</h1>
-  <p><strong>Name:</strong> {{ user.name }}</p>
-  <p><strong>Email:</strong> {{ user.email }}</p>
-  <p><strong>Phone:</strong> {{ user.phone }}</p>
-  <p><strong>Address:</strong> {{ user.address.city }}, {{ user.address.county }}, {{ user.address.country }}</p>
-  <p><strong>Occupation:</strong> {{ user.occupation }}</p>
-  <p><strong>Age:</strong> {{ user.age }}</p>
-  <p><strong>Company:</strong> {{ user.company }}</p>
-  <p><strong>Skills:</strong> {{ user.skills.join(', ') }}</p>
-  <p><strong>Gender:</strong> {{ user.gender }}</p>
-  <p><strong>County:</strong> {{ user.county }}</p>
-  <p><strong>Biography:</strong> {{ user.biography }}</p>
-  <p><strong>Interests:</strong> {{ user.interests.join(', ') }}</p>
-  <p><strong>Verified:</strong> {{ user.verified ? 'Yes' : 'No' }}</p>
+  <h1 class="text-2xl font-bold text-blue-300 mb-4 dark:text-blue-400">User Details</h1>
+  <p><strong class="text-gray-700 dark:text-gray-300">Name:</strong> {{ user.name }}</p>
+  <p><strong class="text-gray-700 dark:text-gray-300">Email:</strong> {{ user.email }}</p>
+  <p><strong class="text-gray-700 dark:text-gray-300">Phone:</strong> {{ user.phone }}</p>
+  <p><strong class="text-gray-700 dark:text-gray-300">Address:</strong> {{ user.address.city }}, {{ user.address.county }}, {{ user.address.country }}</p>
+  <p><strong class="text-gray-700 dark:text-gray-300">Occupation:</strong> {{ user.occupation }}</p>
+  <p><strong class="text-gray-700 dark:text-gray-300">Age:</strong> {{ user.age }}</p>
+  <p><strong class="text-gray-700 dark:text-gray-300">Company:</strong> {{ user.company }}</p>
+  <p><strong class="text-gray-700 dark:text-gray-300">Skills:</strong> {{ user.skills.join(', ') }}</p>
+  <p><strong class="text-gray-700 dark:text-gray-300">Gender:</strong> {{ user.gender }}</p>
+  <p><strong class="text-gray-700 dark:text-gray-300">County:</strong> {{ user.county }}</p>
+  <p><strong class="text-gray-700 dark:text-gray-300">Biography:</strong> {{ user.biography }}</p>
+  <p><strong class="text-gray-700 dark:text-gray-300">Interests:</strong> {{ user.interests.join(', ') }}</p>
+  <p><strong class="text-gray-700 dark:text-gray-300">Verified:</strong> {{ user.verified ? 'Yes' : 'No' }}</p>
 
   <div class="mt-4 flex space-x-2">
     <button (click)="toggleEditForm()"
-            class="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400">
+            class="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 dark:bg-yellow-400 dark:hover:bg-yellow-500">
       Update
     </button>
     <button (click)="onDelete()"
-            class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400">
+            class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 dark:bg-red-400 dark:hover:bg-red-500">
       Delete
     </button>
-  </div> <!-- Confirmation Dialog -->
+  </div> 
 
-
-   <div *ngIf="showConfirmDialog" class="fixed inset-0 flex items-center justify-center z-50">
-    <div class="bg-white p-6 rounded shadow-lg">
-      <p class="mb-4 text-black">Are you sure you want to delete this user?</p>
+  <!-- Confirmation Dialog -->
+  <div *ngIf="showConfirmDialog" class="fixed inset-0 flex items-center justify-center z-50">
+    <div class="bg-white dark:bg-gray-800 p-6 rounded shadow-lg">
+      <p class="mb-4 text-black dark:text-gray-200">Are you sure you want to delete this user?</p>
       <div class="flex space-x-2">
         <button (click)="handleDeleteConfirmation(true)"
-                class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400">
+                class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 dark:bg-red-400 dark:hover:bg-red-500">
           Yes
         </button>
         <button (click)="handleDeleteConfirmation(false)"
-                class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-400">
+                class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 dark:bg-gray-600 dark:hover:bg-gray-700">
           No
         </button>
       </div>
@@ -55,87 +55,86 @@
 
   <!-- Modal for Update Form -->
   <div *ngIf="isEditing" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50" (click)="toggleEditForm()">
-    <div (click)="$event.stopPropagation()" class="bg-white shadow-md rounded-lg p-6 w-full max-w-lg max-h-[calc(100vh-4rem)] overflow-y-auto">
-      <h1 class="text-2xl font-bold text-blue-300 mb-4">Edit User</h1>
+    <div (click)="$event.stopPropagation()" class="bg-white dark:bg-gray-900 shadow-md rounded-lg p-6 w-full max-w-lg max-h-[calc(100vh-4rem)] overflow-y-auto">
+      <h1 class="text-2xl font-bold text-blue-300 mb-4 dark:text-blue-400">Edit User</h1>
       <form (ngSubmit)="onSubmit()" #userForm="ngForm" class="space-y-4">
         <div>
-          <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+          <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Name</label>
           <input type="text" id="name" name="name" [(ngModel)]="user.name" #name="ngModel"
-                 class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
-          <div *ngIf="name.invalid && (name.dirty || name.touched)" class="text-red-500 text-sm">
+                 class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100" required>
+          <div *ngIf="name.invalid && (name.dirty || name.touched)" class="text-red-500 dark:text-red-400 text-sm">
             Name is required.
           </div>
         </div>
 
         <div>
-          <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+          <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
           <input type="email" id="email" name="email" [(ngModel)]="user.email" #email="ngModel"
-                 class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
-          <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-red-500 text-sm">
+                 class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100" required>
+          <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-red-500 dark:text-red-400 text-sm">
             Valid email is required.
           </div>
         </div>
 
         <div>
-          <label for="phone" class="block text-sm font-medium text-gray-700">Phone</label>
+          <label for="phone" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Phone</label>
           <input type="tel" id="phone" name="phone" [(ngModel)]="user.phone"
-                 class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+                 class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100">
         </div>
 
         <div>
-          <label for="address-city" class="block text-sm font-medium text-gray-700">City</label>
+          <label for="address-city" class="block text-sm font-medium text-gray-700 dark:text-gray-300">City</label>
           <input type="text" id="address-city" name="city" [(ngModel)]="user.address.city" #city="ngModel"
-                 class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
-      </div>
+                 class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100" required>
+        </div>
 
-      <div>
-          <label for="address-postalCode" class="block text-sm font-medium text-gray-700">Postal Code</label>
+        <div>
+          <label for="address-postalCode" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Postal Code</label>
           <input type="text" id="address-postalCode" name="postalCode" [(ngModel)]="user.address.postalCode" #postalCode="ngModel"
-                 class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
-      </div>
+                 class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100" required>
+        </div>
 
-      <div>
-          <label for="address-county" class="block text-sm font-medium text-gray-700">County</label>
+        <div>
+          <label for="address-county" class="block text-sm font-medium text-gray-700 dark:text-gray-300">County</label>
           <input type="text" id="address-county" name="county" [(ngModel)]="user.address.county" #addressCounty="ngModel"
-                 class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
-      </div>
+                 class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100" required>
+        </div>
 
-      <div>
-          <label for="address-country" class="block text-sm font-medium text-gray-700">Country</label>
+        <div>
+          <label for="address-country" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Country</label>
           <input type="text" id="address-country" name="country" [(ngModel)]="user.address.country" #addressCountry="ngModel"
-                 class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
-      </div>
-
+                 class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100" required>
+        </div>
 
         <div>
-          <label for="occupation" class="block text-sm font-medium text-gray-700">Occupation</label>
+          <label for="occupation" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Occupation</label>
           <input type="text" id="occupation" name="occupation" [(ngModel)]="user.occupation"
-                 class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+                 class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100">
         </div>
 
         <div>
-          <label for="age" class="block text-sm font-medium text-gray-700">Age</label>
+          <label for="age" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Age</label>
           <input type="number" id="age" name="age" [(ngModel)]="user.age"
-                 class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+                 class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100">
         </div>
 
         <div>
-          <label for="company" class="block text-sm font-medium text-gray-700">Company</label>
+          <label for="company" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Company</label>
           <input type="text" id="company" name="company" [(ngModel)]="user.company"
-                 class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+                 class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100">
         </div>
 
         <div>
-          <label for="skills" class="block text-sm font-medium text-gray-700">Skills</label>
+          <label for="skills" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Skills</label>
           <input type="text" id="skills" name="skills" [(ngModel)]="skillsInput"
-                 class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
-          <p class="text-sm text-gray-500">Separate skills with commas.</p>
+                 class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100">
+          <p class="text-sm text-gray-500 dark:text-gray-400">Separate skills with commas.</p>
         </div>
 
         <div>
-          <label for="gender" class="block text-sm font-medium text-gray-700">Gender</label>
+          <label for="gender" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Gender</label>
           <select id="gender" name="gender" [(ngModel)]="user.gender"
-                  class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+                  class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100">
             <option value="Male">Male</option>
             <option value="Female">Female</option>
             <option value="Other">Other</option>
@@ -143,35 +142,36 @@
         </div>
 
         <div>
-          <label for="county" class="block text-sm font-medium text-gray-700">County</label>
+          <label for="county" class="block text-sm font-medium text-gray-700 dark:text-gray-300">County</label>
           <input type="text" id="county" name="county" [(ngModel)]="user.county"
-                 class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+                 class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100">
         </div>
 
         <div>
-          <label for="biography" class="block text-sm font-medium text-gray-700">Biography</label>
+          <label for="biography" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Biography</label>
           <textarea id="biography" name="biography" [(ngModel)]="user.biography" rows="3"
-                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"></textarea>
+                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100"></textarea>
         </div>
 
         <div>
-          <label for="interests" class="block text-sm font-medium text-gray-700">Interests</label>
+          <label for="interests" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Interests</label>
           <input type="text" id="interests" name="interests" [(ngModel)]="interestsInput"
-                 class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
-          <p class="text-sm text-gray-500">Separate interests with commas.</p>
+                 class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100">
+          <p class="text-sm text-gray-500 dark:text-gray-400">Separate interests with commas.</p>
         </div>
 
         <div>
           <input type="checkbox" id="verified" name="verified" [(ngModel)]="user.verified"
                  class="mr-2">
-          <label for="verified" class="text-sm font-medium text-gray-700">Verified</label>
+          <label for="verified" class="text-sm font-medium text-gray-700 dark:text-gray-300">Verified</label>
         </div>
 
         <button type="submit" [disabled]="userForm.invalid"
-                class="mt-4 px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700">
+                class="mt-4 px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 dark:bg-blue-400 dark:hover:bg-blue-500">
           Submit
         </button>
       </form>
     </div>
   </div>
 </div>
+
