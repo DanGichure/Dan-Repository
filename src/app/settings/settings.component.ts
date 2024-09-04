@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class SettingsComponent implements OnInit {
   isDarkMode = false;
 
+
   ngOnInit(): void {
     // Load the theme from local storage if available
     this.isDarkMode = JSON.parse(localStorage.getItem('darkMode') || 'false');

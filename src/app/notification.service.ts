@@ -1,6 +1,6 @@
 // src/app/services/notification.service.ts
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +15,7 @@ export class NotificationService {
   triggerRefresh(): void {
     this.refreshSubject.next();
   }
+
 }
 
 
