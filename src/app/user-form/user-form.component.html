@@ -1,1 +1,139 @@
-<p>user-form works!</p>
+<!-- Modal Trigger Button -->
+<div class="fixed top-4 right-4 z-50">
+    <button (click)="toggleModal()" type="button"
+            class="px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700">
+        + Add User
+    </button>
+</div>
+
+<!-- Modal Overlay -->
+<div *ngIf="isModalOpen" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-40" (click)="toggleModal()">
+    <!-- Modal Content -->
+    <div (click)="$event.stopPropagation()" class="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 w-full max-w-lg max-h-[calc(100vh-4rem)] overflow-y-auto">
+        <h1 class="text-2xl font-bold text-blue-300 mb-4">Create New User</h1>
+        <form (ngSubmit)="onSubmit()" #userForm="ngForm" class="space-y-4">
+            <!-- Name Field -->
+            <div>
+                <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Name</label>
+                <input type="text" id="name" name="name" [(ngModel)]="user.name" #name="ngModel"
+                       class="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm p-2 dark:bg-gray-700 dark:text-gray-100" required>
+                <div *ngIf="name.invalid && (name.dirty || name.touched)" class="text-red-500 text-sm">
+                    Name is required.
+                </div>
+            </div>
+
+            <!-- Email Field -->
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
+                <input type="email" id="email" name="email" [(ngModel)]="user.email" #email="ngModel"
+                       class="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm p-2 dark:bg-gray-700 dark:text-gray-100" required>
+                <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-red-500 text-sm">
+                    Valid email is required.
+                </div>
+            </div>
+
+            <!-- Phone Field -->
+            <div>
+                <label for="phone" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Phone</label>
+                <input type="tel" id="phone" name="phone" [(ngModel)]="user.phone"
+                       class="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm p-2 dark:bg-gray-700 dark:text-gray-100">
+            </div>
+
+            <!-- Address Fields -->
+            <div>
+                <label for="address-city" class="block text-sm font-medium text-gray-700 dark:text-gray-300">City</label>
+                <input type="text" id="address-city" name="city" [(ngModel)]="user.address.city" #city="ngModel"
+                       class="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm p-2 dark:bg-gray-700 dark:text-gray-100" required>
+            </div>
+
+            <div>
+                <label for="address-postalCode" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Postal Code</label>
+                <input type="text" id="address-postalCode" name="postalCode" [(ngModel)]="user.address.postalCode" #postalCode="ngModel"
+                       class="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm p-2 dark:bg-gray-700 dark:text-gray-100" required>
+            </div>
+
+            <div>
+                <label for="address-county" class="block text-sm font-medium text-gray-700 dark:text-gray-300">County</label>
+                <input type="text" id="address-county" name="county" [(ngModel)]="user.address.county" #addressCounty="ngModel"
+                       class="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm p-2 dark:bg-gray-700 dark:text-gray-100" required>
+            </div>
+
+            <div>
+                <label for="address-country" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Country</label>
+                <input type="text" id="address-country" name="country" [(ngModel)]="user.address.country" #addressCountry="ngModel"
+                       class="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm p-2 dark:bg-gray-700 dark:text-gray-100" required>
+            </div>
+
+            <!-- Occupation Field -->
+            <div>
+                <label for="occupation" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Occupation</label>
+                <input type="text" id="occupation" name="occupation" [(ngModel)]="user.occupation" #occupation="ngModel"
+                       class="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm p-2 dark:bg-gray-700 dark:text-gray-100" required>
+                <div *ngIf="occupation.invalid && (occupation.dirty || occupation.touched)" class="text-red-500 text-sm">
+                    Occupation is required.
+                </div>
+            </div>
+
+            <!-- Age Field -->
+            <div>
+                <label for="age" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Age</label>
+                <input type="number" id="age" name="age" [(ngModel)]="user.age"
+                       class="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm p-2 dark:bg-gray-700 dark:text-gray-100">
+            </div>
+
+            <!-- Company Field -->
+            <div>
+                <label for="company" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Company</label>
+                <input type="text" id="company" name="company" [(ngModel)]="user.company"
+                       class="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm p-2 dark:bg-gray-700 dark:text-gray-100">
+            </div>
+
+            <!-- Skills Field -->
+            <div>
+                <label for="skills" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Skills</label>
+                <input type="text" id="skills" name="skills" [(ngModel)]="skillsInput"
+                       class="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm p-2 dark:bg-gray-700 dark:text-gray-100">
+                <p class="text-sm text-gray-500 dark:text-gray-400">Separate skills with commas.</p>
+            </div>
+
+            <!-- Gender Field -->
+            <div>
+                <label for="gender" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Gender</label>
+                <select id="gender" name="gender" [(ngModel)]="user.gender"
+                        class="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm p-2 dark:bg-gray-700 dark:text-gray-100">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <!-- County Field -->
+            <div>
+                <label for="county" class="block text-sm font-medium text-gray-700 dark:text-gray-300">County</label>
+                <input type="text" id="county" name="county" [(ngModel)]="user.county"
+                       class="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm p-2 dark:bg-gray-700 dark:text-gray-100">
+            </div>
+
+            <!-- Biography Field -->
+            <div>
+                <label for="biography" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Biography</label>
+                <textarea id="biography" name="biography" [(ngModel)]="user.biography" rows="3"
+                          class="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm p-2 dark:bg-gray-700 dark:text-gray-100"></textarea>
+            </div>
+
+            <!-- Interests Field -->
+            <div>
+                <label for="interests" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Interests</label>
+                <input type="text" id="interests" name="interests" [(ngModel)]="interestsInput"
+                       class="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm p-2 dark:bg-gray-700 dark:text-gray-100">
+                <p class="text-sm text-gray-500 dark:text-gray-400">Separate interests with commas.</p>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" [disabled]="userForm.invalid"
+                    class="mt-4 px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700">
+                Submit
+            </button>
+        </form>
+    </div>
+</div>

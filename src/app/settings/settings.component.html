@@ -1,0 +1,14 @@
+<div class="p-4">
+    <h2 class="text-xl font-bold mb-4">Settings</h2>
+    <div class="flex items-center space-x-4">
+      <span>Dark Mode</span>
+      <input 
+        type="checkbox" 
+        id="theme-toggle" 
+        [checked]="isDarkMode" 
+        (change)="toggleTheme()" 
+        class="toggle-checkbox"
+      />
+    </div>
+  </div>
+  

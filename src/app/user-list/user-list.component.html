@@ -1,1 +1,32 @@
-<p>user-list works!</p>
+
+
+<div *ngIf="users.length > 0" class="mt-6">
+  <h2 class="text-xl font-bold text-blue-400 mb-4">Users</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4"> <!-- Grid container with responsive columns and gap -->
+    <div *ngFor="let user of users" class="flex flex-col bg-white border border-gray-200 rounded-md p-4 shadow-sm hover:bg-gray-50 transition-colors">
+      <div class="flex items-center mb-4">
+        <!-- Example usage in a component -->
+        <img src="assets/images/Aang_in_the_Avatar_State.webp" class="w-16 h-16 rounded-full object-cover">
+
+        <div class="ml-4 flex-1">
+          <span class="text-lg font-bold text-gray-900">{{ user.name }}</span>
+          <span class="text-sm text-gray-600 block">{{ user.occupation }}</span>
+        </div>
+      </div>
+      <div class="flex justify-end mt-auto pt-4 border-t border-gray-200">
+        <!-- View button with fixed position at the bottom -->
+        <button (click)="onView(user.id)" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">
+          {{ selectedUser === user ? 'Hide' : 'View' }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+    
+  

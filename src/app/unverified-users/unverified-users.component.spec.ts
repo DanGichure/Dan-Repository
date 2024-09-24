@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UserDetailComponent } from './user-detail.component';
+import { UnverifiedUsersComponent } from './unverified-users.component';
 
-describe('UserDetailComponent', () => {
-  let component: UserDetailComponent;
-  let fixture: ComponentFixture<UserDetailComponent>;
+describe('UnverifiedUsersComponent', () => {
+  let component: UnverifiedUsersComponent;
+  let fixture: ComponentFixture<UnverifiedUsersComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UserDetailComponent]
+      imports: [UnverifiedUsersComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(UserDetailComponent);
+    fixture = TestBed.createComponent(UnverifiedUsersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
